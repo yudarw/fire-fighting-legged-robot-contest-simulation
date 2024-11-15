@@ -36,18 +36,18 @@ def robot_move(left_speed, right_speed):
 
 if __name__ == '__main__':
     # load scene
-    # sim.loadScene(scene_path)
+    #sim.loadScene(scene_path)
     sim.startSimulation()
     robot_init()
 
-    room = 'room2'
+    room = 'room1A'
     save_filename = f'{room}.csv'
 
     with open(save_filename, 'w') as f:
-
+        i = 0
         while True:       
             dist = read_ultrasonic_sensors()
-            print(f'left_dist={round(dist[9], 2)}, rear_dist={round(dist[6])}')
+            #print(f'left_dist={round(dist[9], 2)}, rear_dist={round(dist[6])}')
 
             if keyboard.is_pressed('up'):
                 robot_move(90, 90)
@@ -63,9 +63,10 @@ if __name__ == '__main__':
             
             # press 'r' to record the data
             elif keyboard.is_pressed('r'):
-                dist_recorded = f'{round(dist[9])},{round(dist[6])},{room}'
+                dist_recorded = f'{round(dist[9])},{round(dist[8])},{round(dist[7])},{round(dist[6])},{round(dist[5])},{round(dist[4])},{round(dist[3])},{round(dist[2])},{room}'
                 f.write(dist_recorded + '\n')
-                print(f'recorded: {dist_recorded}')
+                print(f'recorded {i}: {dist_recorded}')
+                i += 1
             
             elif keyboard.is_pressed('q'):
                 break
@@ -73,6 +74,6 @@ if __name__ == '__main__':
             else:
                 robot_move(0, 0)
                 
-            time.sleep(0.1)
+            time.sleep(0.2)
 
     sim.stopSimulation()
