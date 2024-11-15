@@ -3,6 +3,8 @@ import os
 import keyboard
 import math
 from coppeliasim_zmqremoteapi_client import *
+import joblib
+import numpy as np
 
 client = RemoteAPIClient()
 sim = client.require('sim')
@@ -76,5 +78,21 @@ def room_data_collection():
             time.sleep(0.2)
     sim.stopSimulation()
 
+
+def mlp_room_detection():
+    # load the model
+    mlp = joblib.load('room_detection_mlp_model.pkl')
+    scaler = joblib.load('scaler.pkl')
+    room_name = ['room1A', 'room1B', 'room2', 'room3', 'room4']
+    sim.startSimulation()
+    robot_init()
+    while True:
+        dist = read_ultrasonic_sensors()
+        sensor_data = np.array([dist[9], dist[8], dist[7], dist[6], dist[5], dist[4], dist[3], dist[2]]).reshape(1, -1)
+        sensor_data = scaler.transform(sensor_data)
+        room = mlp.predict(sensor_data)
+        print(f'Predicted Room: {room_name[room[0]]}')
+        time.sleep(0.5)
+
 if __name__ == '__main__':
-    room_data_collection()
+    mlp_room_detection()
