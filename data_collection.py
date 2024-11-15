@@ -33,8 +33,7 @@ def robot_move(left_speed, right_speed):
     sim.setJointTargetVelocity(motor_handles[3], right_speed)
 
 
-
-if __name__ == '__main__':
+def room_data_collection():
     # load scene
     #sim.loadScene(scene_path)
     sim.startSimulation()
@@ -75,5 +74,7 @@ if __name__ == '__main__':
                 robot_move(0, 0)
                 
             time.sleep(0.2)
-
     sim.stopSimulation()
+
+if __name__ == '__main__':
+    room_data_collection()
