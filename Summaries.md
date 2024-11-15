@@ -3,27 +3,7 @@ This document describes the process of training a room detection model using a M
 
 ## Data Preparation
 1. **Load the Data**:
-   - The data is loaded from CSV files for different rooms (
-
-room1A.csv
-
-, 
-
-room1B.csv
-
-, 
-
-room2.csv
-
-, 
-
-room3.csv
-
-, 
-
-room4.csv
-
-).
+   - The data is loaded from CSV files for different rooms (room1A.csv, room1B.csv, room2.csv, room3.csv, room4.csv).
    - The data is combined into a single DataFrame.
 
    ```python
@@ -49,8 +29,6 @@ room4.csv
 
 LabelEncoder
 
-.
-
    ```python
    label_encoder = LabelEncoder()
    y = label_encoder.fit_transform(y)
@@ -67,8 +45,6 @@ LabelEncoder
    - The features are standardized using 
 
 StandardScaler
-
-.
 
    ```python
    scaler = StandardScaler()
