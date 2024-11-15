@@ -88,3 +88,9 @@ plt.ylabel('Loss')
 plt.legend()
 plt.show()
 
+# Print the architecture of the model
+print("Number of input features:", mlp.coefs_[0].shape[0])
+print("Number of layers (including input and output):", mlp.n_layers_)
+print("Number of outputs:", mlp.n_outputs_)
+print("Number of neurons in each layer:", [coef.shape[1] for coef in mlp.coefs_])
+print("Activation function:", mlp.activation)
